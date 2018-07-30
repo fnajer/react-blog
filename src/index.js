@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
-import './index.css';
-import App from './App';
+
+import Navbar from './components/Navbar';
+import Welcome from './components/Welcome';
+
 import registerServiceWorker from './registerServiceWorker';
 
 class Home extends React.Component {
@@ -20,18 +22,8 @@ class About extends React.Component {
 ReactDOM.render(
 	<BrowserRouter>
 		<div>
-			<ul>
-				<li>
-					<Link to="/">Root page</Link>
-				</li>
-				<li>
-					<Link to="/home">Home page</Link>
-				</li>
-				<li>
-					<Link to="/about">About page</Link>
-				</li>
-			</ul>
-			<Route exact path="/" component={App} />
+			<Navbar />
+			<Route exact path="/" component={Welcome} />
 			<Route path="/home" component={Home} />
 			<Route path="/about" component={About} />
 		</div>
