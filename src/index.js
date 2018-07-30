@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Link } from 'react-router-dom';
 
 import Navbar from './components/Navbar';
 import Welcome from './components/Welcome';
+import Footer from './components/Footer';
 
 import registerServiceWorker from './registerServiceWorker';
 
@@ -26,6 +27,7 @@ ReactDOM.render(
 			<Route exact path="/" component={Welcome} />
 			<Route path="/home" component={Home} />
 			<Route path="/about" component={About} />
+			<Footer />
 		</div>
 	</BrowserRouter>, 
 	document.getElementById('root'));
