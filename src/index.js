@@ -27,7 +27,7 @@ ReactDOM.render(
 			<Route path="/home" component={Home} />
 			<Route path="/about" component={About} />
 		</div>
-	</BrowserRouter>
-	, document.getElementById('root'));
+	</BrowserRouter>, 
+	document.getElementById('root'));
 
 registerServiceWorker();
