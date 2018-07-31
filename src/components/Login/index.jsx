@@ -30,7 +30,7 @@ class Login extends React.Component {
 			    <p className="text-center text-muted fs-13 mt-20">Don't have an account? <a href="register.html">Sign up</a></p>
 			  </div>
 			</div>
-		)
+		);
 	}
 }
 

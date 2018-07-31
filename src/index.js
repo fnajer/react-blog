@@ -6,6 +6,7 @@ import Navbar from './components/Navbar';
 import Welcome from './components/Welcome';
 import Footer from './components/Footer';
 import Login from './components/Login';
+import SingleArticle from './components/SingleArticle';
 import CreateArticle from './components/CreateArticle';
  
 import registerServiceWorker from './registerServiceWorker';
@@ -30,6 +31,7 @@ ReactDOM.render(
 			<Route path="/home" component={Home} />
 			<Route path="/about" component={About} />
 			<Route path="/login" component={Login} />
+			<Route path="/article/:slug" component={SingleArticle} />
 			<Route path="/articles/create" component={CreateArticle} />
 			<Footer />
 		</div>
