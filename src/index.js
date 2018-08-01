@@ -12,13 +12,32 @@ import CreateArticle from './components/CreateArticle';
  
 import registerServiceWorker from './registerServiceWorker';
 
-class Main extends React.Component {
+class App extends React.Component {
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			authUser: null
+		};
+	}
+
+	componentDidMount() {
+		const user = localStorage.getItem('user');
+
+		if (user) {
+			this.setState({
+				authUser: JSON.parse(user)
+			});
+		}
+	}
+
 	render() {
+		const { location } = this.props;
 		return (
 			<div>
 				{
-					this.props.location.pathname !== '/signup' && this.props.location.pathname !== '/login' &&
-					<Navbar />
+					location.pathname !== '/signup' && location.pathname !== '/login' &&
+					<Navbar authUser={this.state.authUser} />
 				}
 				<Route exact path="/" component={Welcome} />
 				<Route path="/login" component={Login} />
@@ -26,7 +45,7 @@ class Main extends React.Component {
 				<Route path="/article/:slug" component={SingleArticle} />
 				<Route path="/articles/create" component={CreateArticle} />
 				{
-					this.props.location.pathname !== '/signup' && this.props.location.pathname !== '/login' &&
+					location.pathname !== '/signup' && location.pathname !== '/login' &&
 					<Footer />
 				}
 			</div>
@@ -34,11 +53,11 @@ class Main extends React.Component {
 	}
 }
 
-const MainWithRouter = withRouter(Main);
+const AppWithRouter = withRouter(App);
 
 ReactDOM.render(
 	<BrowserRouter>
-		<MainWithRouter />
+		<AppWithRouter />
 	</BrowserRouter>, 
 	document.getElementById('root'));
 
