@@ -9,6 +9,8 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import SingleArticle from './components/SingleArticle';
 import CreateArticle from './components/CreateArticle';
+
+import AuthService from './services/auth';
  
 import registerServiceWorker from './registerServiceWorker';
 
@@ -47,7 +49,11 @@ class App extends React.Component {
 				}
 				<Route exact path="/" component={Welcome} />
 				<Route path="/login" component={Login} />
-				<Route path="/signup" render={(props) => <Signup {...props} setAuthUser={this.setAuthUser} />} />
+				<Route path="/signup" render={
+					(props) => <Signup {...props} 
+						registerUser = {this.props.authService.registerUser}
+						setAuthUser={this.setAuthUser} />
+				}/>
 				<Route path="/article/:slug" component={SingleArticle} />
 				<Route path="/articles/create" component={CreateArticle} />
 				{
@@ -63,7 +69,7 @@ const AppWithRouter = withRouter(App);
 
 ReactDOM.render(
 	<BrowserRouter>
-		<AppWithRouter />
+		<AppWithRouter authService={new AuthService()} />
 	</BrowserRouter>, 
 	document.getElementById('root'));
 
