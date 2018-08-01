@@ -32,11 +32,10 @@ class Signup extends React.Component {
 
 				localStorage.setItem('user', JSON.stringify(user));
 				this.props.setAuthUser(user);
-console.log(user);
+
 				this.props.history.push('/');
 
-		} catch(formattedErrors) {
-
+		} catch (formattedErrors) {
 			this.setState({
 				errors: formattedErrors
 			});
