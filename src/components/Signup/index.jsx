@@ -2,6 +2,24 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 class Signup extends React.Component {
+	constructor() {
+		super();
+
+		this.state = {
+			name: '',
+			email: '',
+			password: '',
+			passwordConfirm: ''
+		};
+
+	}
+
+	handleInputChange = (event) => {
+		this.setState({
+			[event.target.name]: event.target.value
+		});
+	}
+
 	render() {
 		return (
 			<div className="mh-fullscreen bg-img center-vh p-20" style={{backgroundImage: 'url(assets/img/bg-girl.jpg)'}}>
@@ -11,16 +29,16 @@ class Signup extends React.Component {
 			    <br />
 			    <form className="form-type-material">
 			      <div className="form-group">
-			        <input type="text" className="form-control" placeholder="Username" />
+			        <input onChange={this.handleInputChange} name="name" type="text" className="form-control" placeholder="Username" />
 			      </div>
 			      <div className="form-group">
-			        <input type="text" className="form-control" placeholder="Email address" />
+			        <input onChange={this.handleInputChange} name="email" type="text" className="form-control" placeholder="Email address" />
 			      </div>
 			      <div className="form-group">
-			        <input type="password" className="form-control" placeholder="Password" />
+			        <input onChange={this.handleInputChange} name="password" type="password" className="form-control" placeholder="Password" />
 			      </div>
 			      <div className="form-group">
-			        <input type="password" className="form-control" placeholder="Password (confirm)" />
+			        <input onChange={this.handleInputChange} name="passwordConfirm" type="password" className="form-control" placeholder="Password (confirm)" />
 			      </div>
 			      <br />
 			      <button className="btn btn-bold btn-block btn-primary" type="submit">Register</button>
