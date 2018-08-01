@@ -10,7 +10,8 @@ class Signup extends React.Component {
 			name: '',
 			email: '',
 			password: '',
-			passwordConfirm: ''
+			passwordConfirm: '',
+			errors: {}
 		};
 
 	}
@@ -40,9 +41,17 @@ class Signup extends React.Component {
 				console.log('Success');
 			})
 			.catch((errors) => {
-				console.log(errors);
-
 				// show errors to the user
+
+				const formattedErrors = {};
+
+				errors.forEach((error) => {
+					formattedErrors[error.field] = error.message;
+				});
+
+				this.setState({
+					errors: formattedErrors
+				});
 			});
 	}
 
@@ -56,12 +65,24 @@ class Signup extends React.Component {
 			    <form onSubmit={this.handleSubmit} className="form-type-material">
 			      <div className="form-group">
 			        <input onChange={this.handleInputChange} name="name" type="text" className="form-control" placeholder="Username" />
+			        {
+			        	this.state.errors['name'] &&
+			        	<small className="text-danger">{this.state.errors['name']}</small>
+			        }
 			      </div>
 			      <div className="form-group">
 			        <input onChange={this.handleInputChange} name="email" type="text" className="form-control" placeholder="Email address" />
+			        {
+			        	this.state.errors['email'] &&
+			        	<small className="text-danger">{this.state.errors['email']}</small>
+			        }
 			      </div>
 			      <div className="form-group">
 			        <input onChange={this.handleInputChange} name="password" type="password" className="form-control" placeholder="Password" />
+			        {
+			        	this.state.errors['password'] &&
+			        	<small className="text-danger">{this.state.errors['password']}</small>
+			        }
 			      </div>
 			      <div className="form-group">
 			        <input onChange={this.handleInputChange} name="password_confirmation" type="password" className="form-control" placeholder="Password (confirm)" />
