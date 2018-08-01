@@ -24,7 +24,7 @@ class Signup extends React.Component {
 		});
 	}
 
-	handleSubmit = (event) => {
+	handleSubmit = async (event) => {
 		event.preventDefault();
 
 		// validating user data
@@ -43,46 +43,48 @@ class Signup extends React.Component {
 			'password.confirmed': 'The password confirmation does not match.'
 		}
 
-		validateAll(data, rules, messages)
-			.then(() => {
-				// register the user
+		try {
+			await validateAll(data, rules, messages);
+
+			// register the user
 				
-				Axios.post(`${config.apiUrl}/auth/register`, {
+			try {
+				const response = await Axios.post(`${config.apiUrl}/auth/register`, {
 					name: this.state.name,
 					email: this.state.email,
 					password: this.state.password
-				}).then(response => {
-
-					localStorage.setItem('user', JSON.stringify(response.data.data));
-					this.props.setAuthUser(response.data.data);
-
-					this.props.history.push('/');
-
-				}).catch(errors => {
-console.log(errors);
-					const formattedErrors = {};
-
-					formattedErrors['email'] = errors.response.data['email'][0];
-
-					this.setState({
-						errors: formattedErrors
-					});
 				});
 
-			})
-			.catch((errors) => {
-				// show errors to the user
+				localStorage.setItem('user', JSON.stringify(response.data.data));
+				this.props.setAuthUser(response.data.data);
 
+				this.props.history.push('/');
+
+			} catch(errors) {
+				// show errors, which detected on server side, to the user
 				const formattedErrors = {};
 
-				errors.forEach((error) => {
-					formattedErrors[error.field] = error.message;
-				});
+				formattedErrors['email'] = errors.response.data['email'][0];
 
 				this.setState({
 					errors: formattedErrors
 				});
+			}
+
+		} catch(errors) {
+			// show errors, which detected on front side, to the user
+
+			const formattedErrors = {};
+
+			errors.forEach((error) => {
+				formattedErrors[error.field] = error.message;
 			});
+
+			this.setState({
+				errors: formattedErrors
+			});
+		}
+
 	}
 
 	render() {
