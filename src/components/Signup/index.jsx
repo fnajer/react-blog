@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import SignUpForm from './SignUpForm';
+
 class Signup extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       name: '',
@@ -39,7 +41,7 @@ class Signup extends React.Component {
 
   render() {
     return (
-      <Signup
+      <SignUpForm
         handleInputChange={this.handleInputChange}
         handleSubmit={this.handleSubmit}
         errors={this.state.errors}
@@ -51,7 +53,9 @@ class Signup extends React.Component {
 Signup.propTypes = {
   registerUser: PropTypes.func.isRequired,
   setAuthUser: PropTypes.func.isRequired,
-  history: PropTypes.objectOf.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 export default Signup;
