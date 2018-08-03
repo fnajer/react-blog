@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Article = () => ((
+const Article = () => (
   <article className="mt-90">
     <header className="text-center mb-40">
       <h3>
@@ -12,19 +12,22 @@ const Article = () => ((
         <time>May 13, 2017</time>
       </div>
     </header>
-    <a href="blog-single.html">
+    <Link to="/article/some-title">
       <img className="rounded" src="assets/img/blog-1.jpg" alt="..." />
-    </a>
+    </Link>
     <div className="card-block">
-      <p className="text-justify">Together. Great. So good was saying, that can't first let called air divide stars male isn't i. Herb third let
-        may fourth divide. Greater gathering land you'll i their beast have. She'd form sea it wherein fowl, spirit
-        creeping living. Likeness creepeth you hath heaven. Likeness, moveth fruitful behold. Open evening a air us
-        behold. Saying above moving second a subdue likeness after also second.</p>
+      <p className="text-justify">Together. Great. So good was saying, that can&apos;t first
+        let called air divide stars male isn&apos;t i. Herb third let may fourth divide.
+        Greater gathering land you&apos;ll i their beast have. She&apos;d form sea it wherein
+        fowl, spirit creeping living. Likeness creepeth you hath heaven. Likeness, moveth
+        fruitful behold. Open evening a air us behold. Saying above moving second a subdue
+        likeness after also second.
+      </p>
       <p className="text-center mt-40">
         <Link className="btn btn-primary btn-round" to="/article/some-title">Read more</Link>
       </p>
     </div>
   </article>
-));
+);
 
 export default Article;

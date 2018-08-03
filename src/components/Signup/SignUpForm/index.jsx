@@ -1,7 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const SignUpForm = ({ handleInputChange, handleSubmit, errors }) => ((
+const SignUpForm = ({ handleInputChange, handleSubmit, errors }) => (
   <div className="mh-fullscreen bg-img center-vh p-20" style={{ backgroundImage: 'url(assets/img/bg-girl.jpg)' }}>
     <div className="card card-shadowed p-50 w-400 mb-0" style={{ maxWidth: '100%' }}>
       <h5 className="text-uppercase text-center">Register</h5>
@@ -72,11 +73,11 @@ const SignUpForm = ({ handleInputChange, handleSubmit, errors }) => ((
       <hr className="w-30" />
       <p className="text-center text-muted fs-13 mt-20">
         Already have an account?
-        <a href="/login">Sign in</a>
+        <Link href="/login">Sign in</Link>
       </p>
     </div>
   </div>
-));
+);
 
 SignUpForm.propTypes = {
   handleInputChange: PropTypes.func.isRequired,
