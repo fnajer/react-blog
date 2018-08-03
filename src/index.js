@@ -29,7 +29,7 @@ class App extends React.Component {
 		if (user) {
 			this.setState({
 				authUser: JSON.parse(user)
-			});
+			})
 		}
 	}
 
@@ -40,7 +40,7 @@ class App extends React.Component {
 	}
 
 	render() {
-		const { location } = this.props;
+		const { location } = this.props
 		return (
 			<div>
 				{
