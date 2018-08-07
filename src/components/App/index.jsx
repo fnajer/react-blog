@@ -39,7 +39,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { location, authService } = this.props;
+    const { location, authService, articlesService } = this.props;
     return (
       <div>
         {
@@ -72,7 +72,17 @@ class App extends React.Component {
           }
         />
         <Route path="/article/:slug" component={SingleArticle} />
-        <Route path="/articles/create" component={CreateArticle} />
+        <Route
+          path="/articles/create"
+          render={
+            props => (
+              <CreateArticle
+                {...props}
+                getArticleCategories={articlesService.getArticleCategories}
+              />
+            )
+          }
+        />
         {
           location.pathname !== '/signup' && location.pathname !== '/login' &&
           <Footer />

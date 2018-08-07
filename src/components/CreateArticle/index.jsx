@@ -2,21 +2,31 @@ import React from 'react';
 import CreateArticleForm from './CreateArticleForm';
 
 class CreateArticle extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       title: '',
       image: null,
       content: '',
-      channel: null,
+      category: null,
       errors: {},
+      categories: [],
     };
   }
 
-  handleInputChange = (event) => {
+  async componentWillMount() {
+    const categories = await this.props.getArticleCategories();
+
     this.setState({
-      [event.target.name]: event.target.value,
+      categories,
+    });
+  }
+
+  handleInputChange = (event) => {
+    console.log(event.target.files);
+    this.setState({
+      [event.target.name]: event.target.type === 'file' ? event.target.files[0] : event.target.value,
     });
   }
 
@@ -24,6 +34,7 @@ class CreateArticle extends React.Component {
     return (
       <CreateArticleForm
         handleInputChange={this.handleInputChange}
+        categories={this.state.categories}
       />
     );
   }

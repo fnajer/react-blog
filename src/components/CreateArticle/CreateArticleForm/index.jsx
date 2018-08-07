@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import Banner from './../../Banner';
 
-const CreateArticleForm = ({ handleInputChange }) => (
+const CreateArticleForm = ({ handleInputChange, categories }) => (
   <div>
     {/* Header */}
 
@@ -42,11 +42,18 @@ const CreateArticleForm = ({ handleInputChange }) => (
                       id
                       className="form-control form-control-lg"
                       onChange={handleInputChange}
-                      name="channel"
+                      name="category"
                     >
-                      <option value>Select category</option>
-                      <option value>Vuejs</option>
-                      <option value>Reactjs</option>
+                      {
+                        categories.map(category => (
+                          <option
+                            value={category.id}
+                            key={category.id}
+                          >
+                            {category.name}
+                          </option>
+                        ))
+                      }
                     </select>
                   </div>
                 </div>
