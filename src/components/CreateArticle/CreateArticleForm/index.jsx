@@ -85,6 +85,8 @@ const CreateArticleForm = ({ handleInputChange, categories, handleSubmit }) => (
 
 CreateArticleForm.propTypes = {
   handleInputChange: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  categories: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default CreateArticleForm;

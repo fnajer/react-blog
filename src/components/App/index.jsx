@@ -80,6 +80,7 @@ class App extends React.Component {
                 {...props}
                 getArticleCategories={articlesService.getArticleCategories}
                 createArticle={articlesService.createArticle}
+                token={this.state.authUser.token}
               />
             )
           }
@@ -98,6 +99,7 @@ App.propTypes = {
     pathname: PropTypes.string.isRequired,
   }).isRequired,
   authService: PropTypes.objectOf(PropTypes.func).isRequired,
+  articlesService: PropTypes.objectOf(PropTypes.func).isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
