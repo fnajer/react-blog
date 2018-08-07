@@ -45,7 +45,50 @@ export default class AuthService {
         formattedErrors[error.field] = error.message;
       });
 
-      throw formattedErrors;
+      throw formattedErrors; // same Promise.reject(error);
+    }
+  }
+
+  async loginUser(data) {
+    // validating user data
+
+    const rules = {
+      email: 'required|email',
+      password: 'required|string',
+    };
+
+    const messages = {
+      required: 'This {{ field }} is required.',
+      'email.email': 'The email is invalid.',
+    };
+
+    try {
+      await validateAll(data, rules, messages);
+
+      // login the user
+      const response = await Axios.post(`${config.apiUrl}/auth/login`, {
+        email: data.email,
+        password: data.password,
+      });
+
+      return response.data.data;
+    } catch (errors) {
+      const formattedErrors = {};
+
+      if (errors.response && errors.response.status === 401) {
+        // show errors, which detected on server side, to the user
+        // eslint-disable-next-line
+        formattedErrors['email'] = errors.response.data['email'][0];
+
+        throw formattedErrors;
+      }
+
+      // show errors, which detected on front side, to the user
+      errors.forEach((error) => {
+        formattedErrors[error.field] = error.message;
+      });
+
+      throw formattedErrors; // same Promise.reject(error);
     }
   }
 }
