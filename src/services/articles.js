@@ -7,4 +7,19 @@ export default class ArticlesService {
 
     return responce.data.categories;
   }
+
+  createArticle = async (data) => {
+    await this.uploadToCloudinary(data.image);
+  }
+
+  async uploadToCloudinary(image) {
+    const form = new FormData();
+
+    form.append('file', image);
+    form.append('upload_preset', 'jechscpf');
+
+    const responce = await Axios.post('https://api.cloudinary.com/v1_1/dlrbjhllv/image/upload', form);
+
+    return responce.data;
+  }
 }

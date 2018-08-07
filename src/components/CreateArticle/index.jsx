@@ -24,10 +24,16 @@ class CreateArticle extends React.Component {
   }
 
   handleInputChange = (event) => {
-    console.log(event.target.files);
+    
     this.setState({
       [event.target.name]: event.target.type === 'file' ? event.target.files[0] : event.target.value,
     });
+  }
+
+  handleSubmit = async (event) => {
+    event.preventDefault();
+
+    await this.props.createArticle(this.state);
   }
 
   render() {
@@ -35,6 +41,7 @@ class CreateArticle extends React.Component {
       <CreateArticleForm
         handleInputChange={this.handleInputChange}
         categories={this.state.categories}
+        handleSubmit={this.handleSubmit}
       />
     );
   }
