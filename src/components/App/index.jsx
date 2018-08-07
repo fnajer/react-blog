@@ -19,13 +19,7 @@ class App extends React.Component {
     };
   }
 
-  setAuthUser = (authUser) => {
-    this.setState({
-      authUser,
-    });
-  }
-
-  componenWillMount() {
+  componentWillMount() {
     const user = localStorage.getItem('user');
 
     if (user) {
@@ -33,6 +27,15 @@ class App extends React.Component {
         authUser: JSON.parse(user),
       });
     }
+  }
+
+  setAuthUser = (authUser) => {
+    this.setState({
+      authUser,
+    }, () => {
+      localStorage.setItem('user', JSON.stringify(authUser));
+      this.props.history.push('/');
+    });
   }
 
   render() {
@@ -84,6 +87,9 @@ App.propTypes = {
     pathname: PropTypes.string.isRequired,
   }).isRequired,
   authService: PropTypes.objectOf(PropTypes.func).isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 export default App;

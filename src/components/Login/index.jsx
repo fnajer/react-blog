@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import LoginForm from './LoginForm';
 
 class Login extends React.Component {
@@ -8,6 +10,7 @@ class Login extends React.Component {
     this.state = {
       email: '',
       password: '',
+      errors: {},
     };
   }
 
@@ -23,10 +26,7 @@ class Login extends React.Component {
     try {
       const user = await this.props.loginUser(this.state);
 
-      localStorage.setItem('user', JSON.stringify(user));
       this.props.setAuthUser(user);
-      
-      this.props.history.push('/');
     } catch (formattedErrors) {
       this.setState({
         errors: formattedErrors,
@@ -38,9 +38,15 @@ class Login extends React.Component {
       <LoginForm
         handleInputChange={this.handleInputChange}
         handleSubmit={this.handleSubmit}
+        errors={this.state.errors}
       />
     );
   }
 }
+
+Login.propTypes = {
+  loginUser: PropTypes.func.isRequired,
+  setAuthUser: PropTypes.func.isRequired,
+};
 
 export default Login;
