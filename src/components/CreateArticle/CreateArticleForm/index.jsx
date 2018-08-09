@@ -3,7 +3,12 @@ import PropTypes from 'prop-types';
 
 import Banner from './../../Banner';
 
-const CreateArticleForm = ({ handleInputChange, categories, handleSubmit }) => (
+const CreateArticleForm = ({
+  handleInputChange,
+  categories,
+  handleSubmit,
+  errors,
+}) => (
   <div>
     {/* Header */}
 
@@ -18,6 +23,13 @@ const CreateArticleForm = ({ handleInputChange, categories, handleSubmit }) => (
         <div className="container">
           <div className="row">
             <div className="col-12 col-lg-12">
+              <ul className="list-group">
+                {
+                  errors.map(error => (
+                    <li key={error.message} className="list-group-item text-danger">{error.message}</li>
+                  ))
+                }
+              </ul>
               <form
                 className="p-30 bg-gray rounded"
                 onSubmit={handleSubmit}
@@ -87,6 +99,7 @@ CreateArticleForm.propTypes = {
   handleInputChange: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   categories: PropTypes.arrayOf(PropTypes.object).isRequired,
+  errors: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default CreateArticleForm;

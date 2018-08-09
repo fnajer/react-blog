@@ -88,7 +88,7 @@ export default class AuthService {
         formattedErrors[error.field] = error.message;
       });
 
-      throw formattedErrors; // same Promise.reject(error);
+      throw formattedErrors; // same return Promise.reject(error);
     }
   }
 }
