@@ -18,9 +18,22 @@ class Welcome extends React.Component {
     });
   }
 
+  handlePagination = async (url) => {
+    const articles = await this.props.getArticles(url);
+
+    this.setState({
+      articles,
+    });
+  };
+
   render() {
     return (
-      <Articles articles={this.state.articles.data} />
+      <Articles
+        articles={this.state.articles.data}
+        nextUrl={this.state.articles.next_page_url}
+        prevUrl={this.state.articles.prev_page_url}
+        handlePagination={this.handlePagination}
+      />
     );
   }
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import Article from '../../Article';
 import Banner from '../../Banner';
 
-const Articles = ({ articles }) => (
+const Articles = ({ articles, nextUrl, prevUrl, handlePagination }) => (
   <div>
     <Banner
       backgroundImage="url(assets/img/bg-gift.jpg)"
@@ -23,13 +23,11 @@ const Articles = ({ articles }) => (
           }
 
           <nav className="flexbox mt-50 mb-50">
-            <a className="btn btn-white disabled">
-              <i className="ti-arrow-left fs-9 mr-4" />
-              Newer
+            <a className={`btn btn-white ${prevUrl ? '' : 'disabled'}`} href="#" onClick={() => handlePagination(prevUrl)}>
+              <i className="ti-arrow-left fs-9 ml-4" /> Older
             </a>
-            <a className="btn btn-white" href="#">
-              Older
-              <i className="ti-arrow-right fs-9 ml-4" />
+            <a className={`btn btn-white ${nextUrl ? '' : 'disabled'}`} href="#" onClick={() => handlePagination(nextUrl)}>
+              Newer <i className="ti-arrow-right fs-9 mr-4" />
             </a>
           </nav>
         </div>

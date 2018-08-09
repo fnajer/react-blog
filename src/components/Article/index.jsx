@@ -5,7 +5,7 @@ const Article = ({ article }) => (
   <article className="mt-90">
     <header className="text-center mb-40">
       <h3>
-        <a href="blog-single.html">{article.title}</a>
+        <Link to={`article/${article.slug}`}>{article.title}</Link>
       </h3>
       <div className="link-color-default fs-12">
         <a href="#">{article.category_id}</a>,
@@ -20,7 +20,7 @@ const Article = ({ article }) => (
         {article.content}
       </p>
       <p className="text-center mt-40">
-        <Link className="btn btn-primary btn-round" to="/article/some-title">Read more</Link>
+        <Link className="btn btn-primary btn-round" to={`article/${article.slug}`}>Read more</Link>
       </p>
     </div>
   </article>
