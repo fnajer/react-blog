@@ -15,6 +15,12 @@ export default class ArticlesService {
     return responce.data.categories;
   }
 
+  async getArticle(slug) {
+    const responce = await Axios.get(`${config.apiUrl}/article/${slug}`);
+
+    return responce.data.data;
+  }
+
   createArticle = async (data, token) => {
     try {
       if (!data.image) {
