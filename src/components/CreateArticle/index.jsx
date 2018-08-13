@@ -17,11 +17,13 @@ class CreateArticle extends React.Component {
   }
 
   async componentWillMount() {
+    
     const categories = await this.props.getArticleCategories();
 
     this.setState({
       categories,
     });
+    
   }
 
   handleInputChange = (event) => {
@@ -34,7 +36,7 @@ class CreateArticle extends React.Component {
     event.preventDefault();
 
     try {
-      const article = await this.props.createArticle(this.state, this.props.token);
+      await this.props.createArticle(this.state, this.props.token);
       this.props.history.push('/');
     } catch (errors) {
       this.setState({ errors });

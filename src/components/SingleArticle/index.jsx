@@ -13,12 +13,24 @@ class SingleArticleContainer extends React.Component {
   }
 
   async componentWillMount() {
-    const article = await this.props.getArticle(this.props.match.params.slug);
+    let article = this.props.articles.find(article => (
+      article.slug === this.props.match.params.slug)
+    );
 
-    this.setState({
-      article,
-      loading: false,
-    });
+    if (article) {
+      this.setState({
+        article,
+        loading: false,
+      });
+    } else {
+      const article = await this.props.getArticle(this.props.match.params.slug);
+
+      this.setState({
+        article,
+        loading: false,
+      });
+    }
+    
   }
 
   render() {

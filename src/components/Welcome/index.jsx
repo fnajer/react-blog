@@ -16,6 +16,7 @@ class Welcome extends React.Component {
     this.setState({
       articles,
     });
+    this.props.setArticles(articles.data);
   }
 
   handlePagination = async (url) => {
@@ -24,6 +25,7 @@ class Welcome extends React.Component {
     this.setState({
       articles,
     });
+    this.props.setArticles(articles.data);
   };
 
   render() {
