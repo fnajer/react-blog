@@ -2,7 +2,7 @@ import React from 'react';
 import Article from '../../Article';
 import Banner from '../../Banner';
 
-const Articles = ({ articles, nextUrl, prevUrl, handlePagination, deleteArticle }) => (
+const Articles = ({ articles, nextUrl, prevUrl, handlePagination, deleteArticle, editArticle }) => (
   <div>
     <Banner
       backgroundImage={`url(${process.env.PUBLIC_URL}/assets/img/bg-gift.jpg)`}
@@ -18,6 +18,7 @@ const Articles = ({ articles, nextUrl, prevUrl, handlePagination, deleteArticle 
               <div key={article.id}>
                 <Article article={article} />
                 <div className="text-center">
+                  <button onClick={() => editArticle(article)} className="btn btn-warning mr-5">Edit article</button>
                   <button onClick={() => deleteArticle(article.id)} className="btn btn-danger">Delete article</button>
                 </div>
                 <hr />
