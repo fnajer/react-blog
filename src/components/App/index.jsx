@@ -11,6 +11,7 @@ import Signup from '../Signup';
 import SingleArticle from '../SingleArticle';
 import CreateArticle from '../CreateArticle';
 import RedirectIfAuth from '../RedirectIfAuth';
+import UserArticles from '../UserArticles';
 
 class App extends React.Component {
   constructor(props) {
@@ -107,6 +108,16 @@ class App extends React.Component {
             token: this.state.authUser ? this.state.authUser.token : null,
           }}
           isAuthenticated={this.state.authUser !== null} //weak check, later fix this
+        />
+        <Auth
+          path="/user/articles"
+          component={UserArticles}
+          props={{
+            getUserArticles: articlesService.getUserArticles,
+            setArticles: this.setArticles,
+            token: this.state.authUser ? this.state.authUser.token : null,
+          }}
+          isAuthenticated={this.state.authUser !== null}
         />
         {
           location.pathname !== '/signup' && location.pathname !== '/login' &&

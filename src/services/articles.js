@@ -9,6 +9,16 @@ export default class ArticlesService {
     return responce.data.data;
   }
 
+  async getUserArticles(token, url = `${config.apiUrl}/user/articles`) {
+    const responce = await Axios.get(url, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    return responce.data.data;
+  }
+
   async getArticleCategories() {
     const categories = JSON.parse(localStorage.getItem('categories'));
 
@@ -48,8 +58,8 @@ export default class ArticlesService {
 
       const image = await this.uploadToCloudinary(data.image);
 
-      const responce = await Axios(`${config.apiUrl}/articles`, {
-        name: data.title,
+      const responce = await Axios.post(`${config.apiUrl}/articles`, {
+        title: data.title,
         content: data.content,
         category_id: data.category,
         imageUrl: image.secure_url,
@@ -57,9 +67,10 @@ export default class ArticlesService {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      });
+      });console.log(responce.data);
       return responce.data;
     } catch (errors) {
+      console.log(errors);
       if (errors.responce) {
         throw errors.responce.data;
       }

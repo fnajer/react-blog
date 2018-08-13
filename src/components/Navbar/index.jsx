@@ -15,7 +15,7 @@ const Navbar = ({ authUser }) => (
       <div className="topbar-right">
         <ul className="topbar-nav nav">
           <li className="nav-item">
-            <a className="nav-link" href="index.html">Home</a>
+            <Link className="nav-link" to="/">Home</Link>
           </li>
           {
             authUser &&
@@ -30,7 +30,7 @@ const Navbar = ({ authUser }) => (
                 <i className="fa fa-caret-down" />
               </a>
               <div className="nav-submenu">
-                <a className="nav-link" href="page-login.html">My articles</a>
+                <Link className="nav-link" to="/user/articles">My articles</Link>
                 <a className="nav-link">Logout</a>
               </div>
             </li>
