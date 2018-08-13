@@ -2,7 +2,7 @@ import React from 'react';
 import Article from '../../Article';
 import Banner from '../../Banner';
 
-const Articles = ({ articles, nextUrl, prevUrl, handlePagination }) => (
+const Articles = ({ articles, nextUrl, prevUrl, handlePagination, deleteArticle }) => (
   <div>
     <Banner
       backgroundImage={`url(${process.env.PUBLIC_URL}/assets/img/bg-gift.jpg)`}
@@ -17,6 +17,9 @@ const Articles = ({ articles, nextUrl, prevUrl, handlePagination }) => (
             articles && articles.map(article => (
               <div key={article.id}>
                 <Article article={article} />
+                <div className="text-center">
+                  <button onClick={() => deleteArticle(article.id)} className="btn btn-danger">Delete article</button>
+                </div>
                 <hr />
               </div>
             ))

@@ -38,6 +38,16 @@ export default class ArticlesService {
     return responce.data.data;
   }
 
+  async deleteArticle(id, token) {
+    await Axios.delete(`${config.apiUrl}/articles/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    return true;
+  }
+
   createArticle = async (data, token) => {
     try {
       if (!data.image) {
@@ -67,10 +77,10 @@ export default class ArticlesService {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      });console.log(responce.data);
+      });
       return responce.data;
     } catch (errors) {
-      console.log(errors);
+
       if (errors.responce) {
         throw errors.responce.data;
       }

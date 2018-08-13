@@ -23,7 +23,6 @@ class CreateArticle extends React.Component {
     this.setState({
       categories,
     });
-    
   }
 
   handleInputChange = (event) => {
@@ -37,7 +36,7 @@ class CreateArticle extends React.Component {
 
     try {
       const article = await this.props.createArticle(this.state, this.props.token);
-      //this.props.history.push('/');
+      this.props.history.push('/');
     } catch (errors) {
       this.setState({ errors });
     }

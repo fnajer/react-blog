@@ -28,6 +28,18 @@ class UserArticles extends React.Component {
     this.props.setArticles(articles.data);
   };
 
+  deleteArticle = async (id) => {
+    await this.props.deleteArticle(id, this.props.token);
+
+    // remove article from DOM
+    const articles = this.state.articles.data.filter(article => article.id !== id);
+    this.setState({
+      articles: {
+        data: articles,
+      },
+    });
+  }
+
   render() {
     return (
       <Articles
@@ -35,6 +47,7 @@ class UserArticles extends React.Component {
         nextUrl={this.state.articles.next_page_url}
         prevUrl={this.state.articles.prev_page_url}
         handlePagination={this.handlePagination}
+        deleteArticle={this.deleteArticle}
       />
     );
   }

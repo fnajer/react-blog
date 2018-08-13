@@ -116,6 +116,7 @@ class App extends React.Component {
             getUserArticles: articlesService.getUserArticles,
             setArticles: this.setArticles,
             token: this.state.authUser ? this.state.authUser.token : null,
+            deleteArticle: articlesService.deleteArticle,
           }}
           isAuthenticated={this.state.authUser !== null}
         />
