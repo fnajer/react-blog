@@ -129,6 +129,7 @@ class App extends React.Component {
             createArticle: articlesService.createArticle,
             token: this.state.authUser ? this.state.authUser.token : null,
             articles: this.state.articles,
+            updateArticle: articlesService.updateArticle,
           }}
           isAuthenticated={this.state.authUser !== null}
         />

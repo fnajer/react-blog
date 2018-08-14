@@ -13,6 +13,7 @@ const CreateArticleForm = ({
   title,
   content,
   category,
+  updateArticle
 }) => (
   <div>
     {/* Header */}
@@ -37,7 +38,7 @@ const CreateArticleForm = ({
               </ul>
               <form
                 className="p-30 bg-gray rounded"
-                onSubmit={handleSubmit}
+                onSubmit={editing ? updateArticle : handleSubmit}
               >
                 <div className="row">
                   <div className="form-group col-md-12 my-5">
@@ -91,7 +92,7 @@ const CreateArticleForm = ({
                   />
                 </div>
                 <div className="text-center">
-                  <button className="btn btn-lg btn-primary" type="submit">Create Article</button>
+                  <button className="btn btn-lg btn-primary" type="submit">{editing ? 'Update Article' : 'Create Article'}</button>
                 </div>
               </form>
             </div>
