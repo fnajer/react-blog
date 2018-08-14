@@ -21,9 +21,14 @@ class CreateArticle extends React.Component {
   async componentWillMount() {
     
     const categories = await this.props.getArticleCategories();
-
+    
     if (this.props.match.params.slug) {
       const article = this.props.articles.find(articleInArr => articleInArr.slug === this.props.match.params.slug);
+
+      if (!article) {
+        this.props.history.push('/user/articles');
+        return;
+      }
 
       this.setState({
         editing: true,
