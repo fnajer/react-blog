@@ -13,14 +13,14 @@ const CreateArticleForm = ({
   title,
   content,
   category,
-  updateArticle
+  updateArticle,
 }) => (
   <div>
     {/* Header */}
 
     <Banner
       backgroundImage={`url(${process.env.PUBLIC_URL}/assets/img/bg-laptop.jpg)`}
-      title={editing ? `Editing Article: ${article.title}` : "Write an article"}
+      title={editing ? `Editing Article: ${article.title}` : 'Write an article'}
     />
     {/* END Header */}
     {/* Main container */}
@@ -61,19 +61,18 @@ const CreateArticleForm = ({
                   </div>
                   <div className="form-group col-12 col-md-6">
                     <select
-                      id
                       className="form-control form-control-lg"
                       onChange={handleInputChange}
                       name="category"
-                      value={category}
+                      value={category || ''}
                     >
                       {
-                        categories.map(category => (
+                        categories.map(categoryInArr => (
                           <option
-                            value={category.id}
-                            key={category.id}
+                            value={categoryInArr.id}
+                            key={categoryInArr.id}
                           >
-                            {category.name}
+                            {categoryInArr.name}
                           </option>
                         ))
                       }
@@ -86,7 +85,6 @@ const CreateArticleForm = ({
                     rows={4}
                     placeholder="Content"
                     name="content"
-                    defaultValue=""
                     onChange={handleInputChange}
                     value={content}
                   />
@@ -109,6 +107,19 @@ CreateArticleForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   categories: PropTypes.arrayOf(PropTypes.object).isRequired,
   errors: PropTypes.arrayOf(PropTypes.object).isRequired,
+  editing: PropTypes.bool.isRequired,
+  article: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+  }),
+  title: PropTypes.string.isRequired,
+  content: PropTypes.string.isRequired,
+  category: PropTypes.number,
+  updateArticle: PropTypes.func.isRequired,
+};
+
+CreateArticleForm.defaultProps = {
+  article: null,
+  category: null,
 };
 
 export default CreateArticleForm;

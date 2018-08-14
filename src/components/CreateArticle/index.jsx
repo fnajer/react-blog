@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import CreateArticleForm from './CreateArticleForm';
 
 class CreateArticle extends React.Component {
@@ -19,11 +20,11 @@ class CreateArticle extends React.Component {
   }
 
   async componentWillMount() {
-    
     const categories = await this.props.getArticleCategories();
-    
+
     if (this.props.match.params.slug) {
-      const article = this.props.articles.find(articleInArr => articleInArr.slug === this.props.match.params.slug);
+      const article = this.props.articles.find(articleInArr =>
+        articleInArr.slug === this.props.match.params.slug);
 
       if (!article) {
         this.props.history.push('/user/articles');
@@ -60,8 +61,10 @@ class CreateArticle extends React.Component {
         this.props.token,
       );
 
+      this.props.notyService.success('Article was updated!');
       this.props.history.push('/');
     } catch (errors) {
+      this.props.notyService.error('Something went wrong! Please, check for errors.');
       this.setState({ errors });
     }
   }
@@ -76,9 +79,12 @@ class CreateArticle extends React.Component {
     event.preventDefault();
 
     try {
-      const article = await this.props.createArticle(this.state, this.props.token);
+      await this.props.createArticle(this.state, this.props.token);
+
+      this.props.notyService.success('Article was created!');
       this.props.history.push('/');
     } catch (errors) {
+      this.props.notyService.error('Something went wrong! Please, check for errors.');
       this.setState({ errors });
     }
   }
@@ -108,6 +114,30 @@ CreateArticle.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      slug: PropTypes.string,
+    }).isRequired,
+  }).isRequired,
+  notyService: PropTypes.shape({
+    success: PropTypes.func.isRequired,
+    error: PropTypes.func.isRequired,
+  }).isRequired,
+  articles: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    imageUrl: PropTypes.string.isRequired,
+    category: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+    }).isRequired,
+    created_at: PropTypes.string.isRequired,
+  })),
+  updateArticle: PropTypes.func,
+};
+
+CreateArticle.defaultProps = {
+  articles: [],
+  updateArticle: () => {},
 };
 
 export default CreateArticle;

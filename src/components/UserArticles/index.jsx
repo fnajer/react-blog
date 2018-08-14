@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import Articles from './Articles';
 
 class UserArticles extends React.Component {
@@ -57,5 +59,15 @@ class UserArticles extends React.Component {
     );
   }
 }
+
+UserArticles.propTypes = {
+  getUserArticles: PropTypes.func.isRequired,
+  deleteArticle: PropTypes.func.isRequired,
+  setArticles: PropTypes.func.isRequired,
+  token: PropTypes.string.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+};
 
 export default UserArticles;

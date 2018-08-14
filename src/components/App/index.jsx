@@ -40,6 +40,7 @@ class App extends React.Component {
   }
 
   setAuthUser = (authUser) => {
+    this.props.notyService.success('Successfully logged in!');
     this.setState({
       authUser,
     }, () => {
@@ -49,6 +50,7 @@ class App extends React.Component {
   }
 
   removeAuthUser = () => {
+    this.props.notyService.success('Successfully logged out!');
     localStorage.removeItem('user');
     this.setState({
       authUser: null,
@@ -56,7 +58,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { location, authService, articlesService } = this.props;
+    const { location, authService, articlesService, notyService } = this.props;
     return (
       <div>
         {
@@ -82,6 +84,7 @@ class App extends React.Component {
           props={{
             loginUser: authService.loginUser,
             setAuthUser: this.setAuthUser,
+            notyService: notyService,
           }}
           isAuthenticated={this.state.authUser !== null}
         />
@@ -113,6 +116,7 @@ class App extends React.Component {
           props={{
             getArticleCategories: articlesService.getArticleCategories,
             createArticle: articlesService.createArticle,
+            notyService: notyService,
             token: this.state.authUser ? this.state.authUser.token : null,
           }}
           isAuthenticated={this.state.authUser !== null} //weak check, later fix this
@@ -134,6 +138,7 @@ class App extends React.Component {
           props={{
             getArticleCategories: articlesService.getArticleCategories,
             createArticle: articlesService.createArticle,
+            notyService: notyService,
             token: this.state.authUser ? this.state.authUser.token : null,
             articles: this.state.articles,
             updateArticle: articlesService.updateArticle,

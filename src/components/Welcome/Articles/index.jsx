@@ -1,8 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import Article from '../../Article';
 import Banner from '../../Banner';
 
-const Articles = ({ articles, nextUrl, prevUrl, handlePagination }) => (
+const Articles = ({
+  articles,
+  nextUrl,
+  prevUrl,
+  handlePagination,
+}) => (
   <div>
     <Banner
       backgroundImage="url(assets/img/bg-gift.jpg)"
@@ -35,5 +42,20 @@ const Articles = ({ articles, nextUrl, prevUrl, handlePagination }) => (
     </main>
   </div>
 );
+
+Articles.propTypes = {
+  articles: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+  })),
+  nextUrl: PropTypes.string,
+  prevUrl: PropTypes.string,
+  handlePagination: PropTypes.func.isRequired,
+};
+
+Articles.defaultProps = {
+  articles: [],
+  nextUrl: null,
+  prevUrl: null,
+};
 
 export default Articles;

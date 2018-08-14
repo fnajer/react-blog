@@ -5,6 +5,7 @@ import { BrowserRouter, withRouter } from 'react-router-dom';
 import App from './components/App';
 import AuthService from './services/auth';
 import ArticlesService from './services/articles';
+import NotyficationsService from './services/notifications';
 
 import registerServiceWorker from './registerServiceWorker';
 
@@ -15,6 +16,7 @@ ReactDOM.render(
     <AppWithRouter
       authService={new AuthService()}
       articlesService={new ArticlesService()}
+      notyService={new NotyficationsService()}
     />
   </BrowserRouter>,
   document.getElementById('root'),

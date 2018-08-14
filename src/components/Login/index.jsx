@@ -28,6 +28,7 @@ class Login extends React.Component {
 
       this.props.setAuthUser(user);
     } catch (formattedErrors) {
+      this.props.notyService.error('Something went wrong!');
       this.setState({
         errors: formattedErrors,
       });

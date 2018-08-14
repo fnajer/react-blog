@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import Articles from './Articles';
 
 class Welcome extends React.Component {
@@ -39,5 +41,11 @@ class Welcome extends React.Component {
     );
   }
 }
+
+Welcome.propTypes = {
+  getArticles: PropTypes.func.isRequired,
+  setArticles: PropTypes.func.isRequired,
+};
+
 
 export default Welcome;
