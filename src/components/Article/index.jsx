@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const Article = ({ article }) => (
   <article className="mt-90">
@@ -16,14 +17,23 @@ const Article = ({ article }) => (
       <img className="rounded" src={article.imageUrl} alt="..." />
     </Link>
     <div className="card-block">
-      <p className="text-justify">
-        {article.content}
-      </p>
       <p className="text-center mt-40">
         <Link className="btn btn-primary btn-round" to={`article/${article.slug}`}>Read more</Link>
       </p>
     </div>
   </article>
 );
+
+Article.propTypes = {
+  article: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    imageUrl: PropTypes.string.isRequired,
+    category: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+    }).isRequired,
+    created_at: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 export default Article;

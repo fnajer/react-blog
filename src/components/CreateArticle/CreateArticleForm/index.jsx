@@ -124,6 +124,7 @@ CreateArticleForm.propTypes = {
   content: PropTypes.objectOf(PropTypes.any).isRequired,
   category: PropTypes.number,
   updateArticle: PropTypes.func.isRequired,
+  handleEditorChange: PropTypes.func.isRequired,
 };
 
 CreateArticleForm.defaultProps = {

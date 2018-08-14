@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import renderHtml from 'react-render-html';
 
 const SingleArticle = ({ article }) => (
   <div>
@@ -41,7 +43,7 @@ const SingleArticle = ({ article }) => (
         <div className="container">
           <div className="row">
             <div className="col-12 col-lg-8 offset-lg-2">
-              {article.content}
+              {renderHtml(article.content)}
             </div>
           </div>
         </div>
@@ -64,5 +66,17 @@ const SingleArticle = ({ article }) => (
     {/* END Main container */}
   </div>
 );
+
+SingleArticle.propTypes = {
+  article: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    imageUrl: PropTypes.string.isRequired,
+    category: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+    }).isRequired,
+    created_at: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 export default SingleArticle;
