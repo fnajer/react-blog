@@ -48,13 +48,20 @@ class App extends React.Component {
     });
   }
 
+  removeAuthUser = () => {
+    localStorage.removeItem('user');
+    this.setState({
+      authUser: null,
+    });
+  }
+
   render() {
     const { location, authService, articlesService } = this.props;
     return (
       <div>
         {
           location.pathname !== '/signup' && location.pathname !== '/login' &&
-          <Navbar authUser={this.state.authUser} />
+          <Navbar authUser={this.state.authUser} removeAuthUser={this.removeAuthUser} />
         }
         <Route
           exact
