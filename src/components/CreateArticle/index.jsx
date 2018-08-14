@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { EditorState, convertToRaw } from 'draft-js';
+import draftToHtml from 'draftjs-to-html';
 
 import CreateArticleForm from './CreateArticleForm';
 
@@ -10,7 +12,7 @@ class CreateArticle extends React.Component {
     this.state = {
       title: '',
       image: null,
-      content: '',
+      content: EditorState.createEmpty(),
       category: null,
       errors: [],
       categories: [],
@@ -49,13 +51,15 @@ class CreateArticle extends React.Component {
   updateArticle = async (event) => {
     event.preventDefault();
 
+    const objContent = convertToRaw(this.state.content.getCurrentContent());
+
     try {
       await this.props.updateArticle(
         {
           title: this.state.title,
-          image: this.state.image,
-          content: this.state.content,
+          content: draftToHtml(objContent),
           category: this.state.category,
+          image: this.state.image,
         },
         this.state.article,
         this.props.token,
@@ -78,8 +82,15 @@ class CreateArticle extends React.Component {
   handleSubmit = async (event) => {
     event.preventDefault();
 
+    const objContent = convertToRaw(this.state.content.getCurrentContent());
+
     try {
-      await this.props.createArticle(this.state, this.props.token);
+      await this.props.createArticle({
+        title: this.state.title,
+        content: draftToHtml(objContent),
+        category: this.state.category,
+        image: this.state.image,
+      }, this.props.token);
 
       this.props.notyService.success('Article was created!');
       this.props.history.push('/');
@@ -87,6 +98,12 @@ class CreateArticle extends React.Component {
       this.props.notyService.error('Something went wrong! Please, check for errors.');
       this.setState({ errors });
     }
+  }
+
+  handleEditorChange = (editorState) => {
+    this.setState({
+      content: editorState,
+    });
   }
 
   render() {
@@ -102,6 +119,7 @@ class CreateArticle extends React.Component {
         content={this.state.content}
         category={this.state.category}
         updateArticle={this.updateArticle}
+        handleEditorChange={this.handleEditorChange}
       />
     );
   }

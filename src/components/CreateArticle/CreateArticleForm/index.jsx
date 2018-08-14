@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Editor } from 'react-draft-wysiwyg';
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
 import Banner from './../../Banner';
 
@@ -14,6 +16,7 @@ const CreateArticleForm = ({
   content,
   category,
   updateArticle,
+  handleEditorChange,
 }) => (
   <div>
     {/* Header */}
@@ -80,13 +83,19 @@ const CreateArticleForm = ({
                   </div>
                 </div>
                 <div className="form-group">
-                  <textarea
+                  {/* <textarea
                     className="form-control form-control-lg"
                     rows={4}
                     placeholder="Content"
                     name="content"
                     onChange={handleInputChange}
                     value={content}
+                  /> */}
+                  <Editor
+                    editorClassName="form-control form-control-lg"
+                    placeholder="Type content"
+                    initialEditorState={content}
+                    onEditorStateChange={handleEditorChange}
                   />
                 </div>
                 <div className="text-center">
@@ -112,7 +121,7 @@ CreateArticleForm.propTypes = {
     title: PropTypes.string.isRequired,
   }),
   title: PropTypes.string.isRequired,
-  content: PropTypes.string.isRequired,
+  content: PropTypes.objectOf(PropTypes.any).isRequired,
   category: PropTypes.number,
   updateArticle: PropTypes.func.isRequired,
 };
