@@ -8,13 +8,18 @@ const CreateArticleForm = ({
   categories,
   handleSubmit,
   errors,
+  editing,
+  article,
+  title,
+  content,
+  category,
 }) => (
   <div>
     {/* Header */}
 
     <Banner
       backgroundImage={`url(${process.env.PUBLIC_URL}/assets/img/bg-laptop.jpg)`}
-      title="Write an article"
+      title={editing ? `Editing Article: ${article.title}` : "Write an article"}
     />
     {/* END Header */}
     {/* Main container */}
@@ -50,6 +55,7 @@ const CreateArticleForm = ({
                       name="title"
                       placeholder="Title"
                       onChange={handleInputChange}
+                      value={title}
                     />
                   </div>
                   <div className="form-group col-12 col-md-6">
@@ -58,6 +64,7 @@ const CreateArticleForm = ({
                       className="form-control form-control-lg"
                       onChange={handleInputChange}
                       name="category"
+                      value={category}
                     >
                       {
                         categories.map(category => (
@@ -80,6 +87,7 @@ const CreateArticleForm = ({
                     name="content"
                     defaultValue=""
                     onChange={handleInputChange}
+                    value={content}
                   />
                 </div>
                 <div className="text-center">

@@ -13,6 +13,8 @@ class CreateArticle extends React.Component {
       category: null,
       errors: [],
       categories: [],
+      editing: false,
+      article: null,
     };
   }
 
@@ -20,9 +22,23 @@ class CreateArticle extends React.Component {
     
     const categories = await this.props.getArticleCategories();
 
-    this.setState({
-      categories,
-    });
+    if (this.props.match.params.slug) {
+      const article = this.props.articles.find(articleInArr => articleInArr.slug === this.props.match.params.slug);
+
+      this.setState({
+        editing: true,
+        categories,
+        article,
+        title: article.title,
+        category: article.category_id,
+        content: article.content,
+      })
+    } else {
+      this.setState({
+        categories,
+      });
+    }
+    
   }
 
   handleInputChange = (event) => {
@@ -49,6 +65,11 @@ class CreateArticle extends React.Component {
         categories={this.state.categories}
         handleSubmit={this.handleSubmit}
         errors={this.state.errors}
+        editing={this.state.editing}
+        article={this.state.article}
+        title={this.state.title}
+        content={this.state.content}
+        category={this.state.category}
       />
     );
   }
