@@ -1,6 +1,7 @@
 import Axios from 'axios';
-import { validateAll } from 'indicative';
 import config from './../config';
+
+const { validateAll } = window;
 
 export default class ArticlesService {
   async getArticles(url = `${config.apiUrl}/articles`) {
@@ -25,10 +26,10 @@ export default class ArticlesService {
     if (categories) {
       return categories;
     }
-    
+  
     const responce = await Axios.get(`${config.apiUrl}/categories`);
     localStorage.setItem('categories', JSON.stringify(responce.data.categories));
-   
+ 
     return responce.data.categories;
   }
 
